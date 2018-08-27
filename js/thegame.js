@@ -8,7 +8,7 @@ let player = 0;
 let lock;
 let option;
 
-// var step - переменная блокирует возможность сделать ход;
+var step = 1;
 
 
 let thirst_choice;
@@ -93,8 +93,11 @@ function check_element(arrow1, a) {
 function ai_firstMove() {
   if (thirst_choice == 0 && second_choice == 1) {
 
-    createCross(cells[4]);
+    setTimeout(function() {
+      createCross(cells[4]);
+    }, 600);
     check_element(SecondaryArrow, 4);
+    step = 1;
   }
 }
 
@@ -132,7 +135,8 @@ function Strategy(use, in_stock) {
             if (usedArrow[b] == 2) {
               for (var stk2 in in_stockArrow) {
                 if (in_stockArrow[stk2] == 6 && cells[4].childNodes.length == cells[2].childNodes.length) {
-                  console.log('6-1');return val = 6;
+                  console.log('6-1');
+                  return val = 6;
                 }
               }
             }
@@ -153,8 +157,9 @@ function Strategy(use, in_stock) {
           }
           if (usedArrow[b] == 7) {
             for (var stk4 in in_stockArrow) {
-              if (in_stockArrow[stk4] == 6&& cells[2].childNodes.length == 0 && cells[8].childNodes.length == 0 && cells[1].childNodes.length == 0&& cells[3].childNodes.length == 0&& cells[5].childNodes.length == 0) {
-                console.log('6-2');return val = 6;
+              if (in_stockArrow[stk4] == 6 && cells[2].childNodes.length == 0 && cells[8].childNodes.length == 0 && cells[1].childNodes.length == 0 && cells[3].childNodes.length == 0 && cells[5].childNodes.length == 0) {
+                console.log('6-2');
+                return val = 6;
               }
             }
           }
@@ -163,7 +168,8 @@ function Strategy(use, in_stock) {
 
 
         if (in_stockArrow[c] == 0 && cells[5].childNodes.length == 0 && cells[8].childNodes.length == 0 && cells[7].childNodes.length == 0) {
-          console.log('0-1');val = 0;
+          console.log('0-1');
+          val = 0;
           return val;
         }
 
@@ -213,7 +219,8 @@ function Strategy(use, in_stock) {
         if (in_stockArrow[c] == 6) {
           for (var a3 in usedArrow) {
             if (usedArrow[a3] == 0 && cells[0].childNodes.length == cells[3].childNodes.length) {
-              console.log('6-3');val = 6;
+              console.log('6-3');
+              val = 6;
               return val;
             }
           }
@@ -222,7 +229,8 @@ function Strategy(use, in_stock) {
         if (in_stockArrow[c] == 6) {
           for (var a10 in usedArrow) {
             if (usedArrow[a10] == 7 && cells[7].childNodes.length == cells[8].childNodes.length) {
-              console.log('6-4');val = 6;
+              console.log('6-4');
+              val = 6;
               return val;
             }
           }
@@ -259,7 +267,8 @@ function Strategy(use, in_stock) {
         if (in_stockArrow[c] == 0) {
           for (var a6 in usedArrow) {
             if (usedArrow[a6] == 8 && cells[8].childNodes.length == cells[4].childNodes.length) {
-              console.log('0-2');val = 0;
+              console.log('0-2');
+              val = 0;
               return val;
             }
           }
@@ -268,8 +277,9 @@ function Strategy(use, in_stock) {
 
         if (in_stockArrow[c] == 0) {
           for (var a23 in usedArrow) {
-            if (usedArrow[a23] == 3 && cells[6].childNodes.length == cells[3].childNodes.length&&cells[0].childNodes.length==0) {
-              console.log('0-3');val = 0;
+            if (usedArrow[a23] == 3 && cells[6].childNodes.length == cells[3].childNodes.length && cells[0].childNodes.length == 0) {
+              console.log('0-3');
+              val = 0;
               return val;
             }
           }
@@ -278,7 +288,8 @@ function Strategy(use, in_stock) {
         if (in_stockArrow[c] == 0) {
           for (var a24 in usedArrow) {
             if (usedArrow[a24] == 1 && cells[1].childNodes.length == cells[2].childNodes.length) {
-              console.log('0-4');val = 0;
+              console.log('0-4');
+              val = 0;
               return val;
             }
           }
@@ -297,7 +308,8 @@ function Strategy(use, in_stock) {
           for (var a7 in usedArrow) {
             if (usedArrow[a7] == 2 && cells[2].childNodes.length == cells[8].childNodes.length) {
               val = 5;
-              console.log('5-1');return val;
+              console.log('5-1');
+              return val;
             }
           }
         }
@@ -305,7 +317,8 @@ function Strategy(use, in_stock) {
         if (in_stockArrow[c] == 5) {
           for (var a8 in usedArrow) {
             if (usedArrow[a8] == 3 && cells[3].childNodes.length == cells[4].childNodes.length) {
-              console.log('5-2');val = 5;
+              console.log('5-2');
+              val = 5;
               return val;
             }
           }
@@ -396,7 +409,8 @@ function Strategy(use, in_stock) {
             if (usedArrow[w] == 2 && cells[2].childNodes.length == cells[4].childNodes.length)
 
             {
-            console.log('6-5');  return val = 6
+              console.log('6-5');
+              return val = 6
             }
           }
         }
@@ -438,18 +452,18 @@ function Strategy(use, in_stock) {
   return val;
 }
 
-function toGoToggle(num,other) {
-var go=other;
+function toGoToggle(num, other) {
+  var go = other;
   for (var i = 0; i < 8; i++) {
 
-    if (i==num) {
+    if (i == num) {
       console.log('nerandom');
-      go=num;
+      go = num;
     }
 
   }
 
-return go;
+  return go;
 }
 
 
@@ -458,7 +472,7 @@ function aigame(arrow2) {
   var randomPosition = arr2[getrandom(arr2)];
   var newPosition = Strategy(used, SecondaryArrow);
   var toGo = toGoToggle(newPosition, randomPosition);
- // toGo=newPosition;
+  // toGo=newPosition;
 
   if (second_choice == 0 && win_ind == 0) {
 
@@ -466,7 +480,7 @@ function aigame(arrow2) {
 
     cells[toGo].appendChild(createZero());
     check_element(SecondaryArrow, toGo);
-
+    step = 1;
 
   }
 
@@ -475,7 +489,7 @@ function aigame(arrow2) {
 
     createCross(cells[toGo]);
     check_element(SecondaryArrow, toGo);
-
+    step = 1;
 
   }
 }
@@ -563,7 +577,7 @@ function win() {
     document.querySelector('.after_match').classList.remove('hide');
   }
 
-  if (SecondaryArrow.length==0) {
+  if (SecondaryArrow.length == 0) {
     document.querySelector('.after_match').classList.remove('hide');
   }
 }
@@ -588,17 +602,18 @@ function NewGame() {
   SecondaryArrow = arrowCreator(cells);
   win_ind = 0;
   player = 0;
-document.querySelector('.after_match').classList.toggle('hide');
+  step = 1;
+  document.querySelector('.after_match').classList.toggle('hide');
   Array.prototype.forEach.call(cells, function(elem) {
     while (elem.lastChild) {
       elem.removeChild(elem.lastChild);
       elem.classList.remove('win');
     }
   })
-  if (second_choice==1&&option==0) {
+  if (second_choice == 1 && option == 0) {
     ai_firstMove();
   }
-  if (option==1) {
+  if (option == 1) {
     document.querySelector('.mindfield').classList.toggle('hide');
     document.querySelector('.start1').classList.toggle('hide');
   }
@@ -606,12 +621,12 @@ document.querySelector('.after_match').classList.toggle('hide');
 
 
 document.getElementById('reborn').addEventListener('click', function() {
-  option=0;
+  option = 0;
   NewGame();
 })
 
 document.getElementById('main_menu').addEventListener('click', function() {
-  option=1;
+  option = 1;
 
   NewGame();
 })
@@ -627,26 +642,30 @@ Array.prototype.forEach.call(cells, function(cell) {
         lock = 0;
       }
     }
-    if (thirst_choice == 0 && second_choice == 0 && lock == 0 && win_ind == 0) {
+    if (thirst_choice == 0 && second_choice == 0 && lock == 0 && win_ind == 0 && step == 1) {
       createCross(cell);
       check_element(SecondaryArrow, iscl(cell));
       win();
-      setTimeout(1500, aigame(SecondaryArrow));
+      setTimeout(function() {
+        aigame(SecondaryArrow);win();
+      }, 200);
 
       lock = 1;
-      win();
 
+      step = 0;
 
     }
 
-    if (thirst_choice == 0 && second_choice == 1 && lock == 0 && win_ind == 0) {
+    if (thirst_choice == 0 && second_choice == 1 && lock == 0 && win_ind == 0 && step == 1) {
       cell.appendChild(createZero());
       check_element(SecondaryArrow, iscl(cell));
       win();
-      setTimeout(1500, aigame(SecondaryArrow));
+      setTimeout(function() {
+        aigame(SecondaryArrow);win();
+      }, 200);
       lock = 1;
-      win();
 
+      step = 0;
 
     }
 
