@@ -8,7 +8,7 @@ let player = 0;
 let lock;
 let option;
 
-var step = 1;
+let step = 1;
 
 
 let thirst_choice;
@@ -51,6 +51,7 @@ zero.addEventListener('click', function() {
   second_choice = 1;
   document.querySelector('.start2').classList.toggle('hide');
   document.querySelector('.mindfield').classList.toggle('hide');
+  step=0;
   ai_firstMove();
 });
 
@@ -94,10 +95,10 @@ function ai_firstMove() {
   if (thirst_choice == 0 && second_choice == 1) {
 
     setTimeout(function() {
-      createCross(cells[4]);
+      createCross(cells[4]);step = 1;
     }, 600);
     check_element(SecondaryArrow, 4);
-    step = 1;
+
   }
 }
 
@@ -603,6 +604,9 @@ function NewGame() {
   win_ind = 0;
   player = 0;
   step = 1;
+  if (second_choice==1) {
+    step=0;
+  }
   document.querySelector('.after_match').classList.toggle('hide');
   Array.prototype.forEach.call(cells, function(elem) {
     while (elem.lastChild) {
@@ -647,7 +651,8 @@ Array.prototype.forEach.call(cells, function(cell) {
       check_element(SecondaryArrow, iscl(cell));
       win();
       setTimeout(function() {
-        aigame(SecondaryArrow);win();
+        aigame(SecondaryArrow);
+        win();
       }, 200);
 
       lock = 1;
@@ -661,7 +666,8 @@ Array.prototype.forEach.call(cells, function(cell) {
       check_element(SecondaryArrow, iscl(cell));
       win();
       setTimeout(function() {
-        aigame(SecondaryArrow);win();
+        aigame(SecondaryArrow);
+        win();
       }, 200);
       lock = 1;
 
