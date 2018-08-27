@@ -45,6 +45,7 @@ cross.addEventListener('click', function() {
   second_choice = 0;
   document.querySelector('.start2').classList.toggle('hide');
   document.querySelector('.mindfield').classList.toggle('hide');
+  step=1;
 });
 
 zero.addEventListener('click', function() {
