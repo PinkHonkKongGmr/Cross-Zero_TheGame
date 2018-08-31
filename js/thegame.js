@@ -13,7 +13,16 @@ let step = 1;
 
 let thirst_choice;
 let second_choice;
-
+let winPositions = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6]
+];
 
 
 function arrowCreator(arr) {
@@ -45,14 +54,14 @@ cross.addEventListener('click', function() {
   second_choice = 0;
   document.querySelector('.start2').classList.toggle('hide');
   document.querySelector('.mindfield').classList.toggle('hide');
-  step=1;
+  step = 1;
 });
 
 zero.addEventListener('click', function() {
   second_choice = 1;
   document.querySelector('.start2').classList.toggle('hide');
   document.querySelector('.mindfield').classList.toggle('hide');
-  step=0;
+  step = 0;
   ai_firstMove();
 });
 
@@ -96,7 +105,8 @@ function ai_firstMove() {
   if (thirst_choice == 0 && second_choice == 1) {
 
     setTimeout(function() {
-      createCross(cells[4]);step = 1;
+      createCross(cells[4]);
+      step = 1;
     }, 600);
     check_element(SecondaryArrow, 4);
 
@@ -511,78 +521,29 @@ function iscl(sel) {
   return index;
 }
 
-function win() {
-
-  if (cells[0].childNodes.length == cells[1].childNodes.length && cells[0].childNodes.length == cells[2].childNodes.length && cells[0].childNodes.length != 0) {
-    cells[0].classList.add('win');
-    cells[1].classList.add('win');
-    cells[2].classList.add('win');
-    win_ind = 1;
-    document.querySelector('.after_match').classList.remove('hide');
+function winProcesses(a, b, c) {
+  for (arg of arguments) {
+    cells[arg].classList.add('win');
   }
-  if (cells[0].childNodes.length == cells[4].childNodes.length && cells[0].childNodes.length == cells[8].childNodes.length && cells[0].childNodes.length != 0) {
-    cells[0].classList.add('win');
-    cells[4].classList.add('win');
-    cells[8].classList.add('win');
-    win_ind = 1;
-    document.querySelector('.after_match').classList.remove('hide');
-  }
-  if (cells[2].childNodes.length == cells[4].childNodes.length && cells[2].childNodes.length == cells[6].childNodes.length && cells[2].childNodes.length != 0) {
-    cells[2].classList.add('win');
-    cells[4].classList.add('win');
-    cells[6].classList.add('win');
-    win_ind = 1;
-    document.querySelector('.after_match').classList.remove('hide');
-  }
-  if (cells[2].childNodes.length == cells[4].childNodes.length && cells[2].childNodes.length == cells[6].childNodes.length && cells[2].childNodes.length != 0) {
-    cells[2].classList.add('win');
-    cells[4].classList.add('win');
-    cells[6].classList.add('win');
-    win_ind = 1;
-    document.querySelector('.after_match').classList.remove('hide');
-  }
-  if (cells[2].childNodes.length == cells[5].childNodes.length && cells[2].childNodes.length == cells[8].childNodes.length && cells[2].childNodes.length != 0) {
-    cells[2].classList.add('win');
-    cells[5].classList.add('win');
-    cells[8].classList.add('win');
-    win_ind = 1;
-    document.querySelector('.after_match').classList.remove('hide');
-  }
-
-  if (cells[0].childNodes.length == cells[3].childNodes.length && cells[0].childNodes.length == cells[6].childNodes.length && cells[0].childNodes.length != 0) {
-    cells[0].classList.add('win');
-    cells[3].classList.add('win');
-    cells[6].classList.add('win');
-    win_ind = 1;
-    document.querySelector('.after_match').classList.remove('hide');
-  }
-
-  if (cells[1].childNodes.length == cells[4].childNodes.length && cells[1].childNodes.length == cells[7].childNodes.length && cells[1].childNodes.length != 0) {
-    cells[1].classList.add('win');
-    cells[4].classList.add('win');
-    cells[7].classList.add('win');
-    win_ind = 1;
-    document.querySelector('.after_match').classList.remove('hide');
-  }
-  if (cells[3].childNodes.length == cells[4].childNodes.length && cells[3].childNodes.length == cells[5].childNodes.length && cells[3].childNodes.length != 0) {
-    cells[3].classList.add('win');
-    cells[4].classList.add('win');
-    cells[5].classList.add('win');
-    win_ind = 1;
-    document.querySelector('.after_match').classList.remove('hide');
-  }
-  if (cells[6].childNodes.length == cells[7].childNodes.length && cells[6].childNodes.length == cells[8].childNodes.length && cells[6].childNodes.length != 0) {
-    cells[6].classList.add('win');
-    cells[7].classList.add('win');
-    cells[8].classList.add('win');
-    win_ind = 1;
-    document.querySelector('.after_match').classList.remove('hide');
-  }
-
-  if (SecondaryArrow.length == 0) {
-    document.querySelector('.after_match').classList.remove('hide');
-  }
+  win_ind = 1;
+  document.querySelector('.after_match').classList.remove('hide');
 }
+
+
+function win() {
+  for (position of winPositions) {
+
+    if (cells[position[0]].childNodes.length == cells[position[1]].childNodes.length && cells[position[0]].childNodes.length == cells[position[2]].childNodes.length && cells[position[0]].childNodes.length != 0) {
+      winProcesses(position[0], position[1], position[2]);
+    }
+    if (SecondaryArrow.length == 0) {
+    document.querySelector('.after_match').classList.remove('hide');
+  }
+  }
+
+}
+
+
 
 function changePlayer() {
 
@@ -605,8 +566,8 @@ function NewGame() {
   win_ind = 0;
   player = 0;
   step = 1;
-  if (second_choice==1) {
-    step=0;
+  if (second_choice == 1) {
+    step = 0;
   }
   document.querySelector('.after_match').classList.toggle('hide');
   Array.prototype.forEach.call(cells, function(elem) {
